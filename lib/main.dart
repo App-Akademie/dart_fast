@@ -1,20 +1,23 @@
+import 'package:dart_fast/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
+/// Features
+// - Aufgaben anzeigen lassen + lösen (Quiz)
+// - Login (Authentication)
+// - Registrierung (Authentication)
+// - Übersicht über gelöste Aufgaben (Exerciseboard)
+// - Erklärung der App (Onboarding)
+// - Einstellungen der App ändern (Settings)
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return const MainScreen();
   }
 }
