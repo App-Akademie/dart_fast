@@ -1,3 +1,3 @@
 # dart_fast
 
-A new Flutter project.
+Eine kleine App, mit der man Dart üben kann.
