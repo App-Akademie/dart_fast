@@ -2,6 +2,7 @@ import 'package:dart_fast/config/sizes.dart';
 import 'package:dart_fast/config/themes.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
 import 'package:dart_fast/features/authentication/widgets/df_text_field.dart';
+import 'package:dart_fast/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -30,7 +31,13 @@ class LoginScreen extends StatelessWidget {
                 normalVerticalSpacing,
                 const DfTextField(),
                 normalVerticalSpacing,
-                DfButton(onPressed: () {}, child: const Text("Login")),
+                DfButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const MainScreen(),
+                      ));
+                    },
+                    child: const Text("Login")),
                 const Text("Forgot Password"),
                 const Text("Need an account?"),
               ],
