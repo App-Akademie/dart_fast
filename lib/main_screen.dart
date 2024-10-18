@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:dart_fast/config/themes.dart';
+import 'package:dart_fast/features/authentication/widgets/df_button.dart';
+import 'package:dart_fast/features/authentication/widgets/df_text_field.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -30,6 +34,12 @@ class MainScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text("Default text test"),
+                const DfTextField(),
+                DfButton(
+                    onPressed: () {
+                      log("Button was pressed");
+                    },
+                    child: const Text("Hi there")),
                 OutlinedButton(
                   onPressed: () {
                     {}
