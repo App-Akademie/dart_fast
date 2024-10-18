@@ -19,7 +19,10 @@ class MainScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Hello World!'),
+              const Text(
+                'Hello World!',
+                style: TextStyle(fontFamily: "Dongle", fontSize: 42),
+              ),
               const SizedBox(height: 16),
               OutlinedButton(
                 onPressed: () {

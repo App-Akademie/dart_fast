@@ -21,6 +21,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+  fonts:
+    - family: Dongle
+      fonts: 
+        - asset: assets/fonts/Dongle-Regular.ttf
+        - asset: assets/fonts/Dongle-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Dongle-Light.ttf
+          weight: 300
 
 flutter_launcher_icons:
   android: true
