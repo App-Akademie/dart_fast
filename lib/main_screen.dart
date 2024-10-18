@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dart_fast/config/themes.dart';
-import 'package:dart_fast/features/authentication/screens/login_screen.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
 import 'package:dart_fast/features/authentication/widgets/df_text_field.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class MainScreen extends StatelessWidget {
         ),
         // Builder needed for different context, so the theme is picked up.
         body: Builder(builder: (context) {
-          return const LoginScreen();
+          return const PlayAroundWidget();
         }),
       ),
     );

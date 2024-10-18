@@ -1,4 +1,4 @@
-import 'package:dart_fast/main_screen.dart';
+import 'package:dart_fast/features/authentication/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,6 +18,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MainScreen();
+    return const LoginScreen();
   }
 }
