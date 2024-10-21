@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 final ThemeData lightTheme = ThemeData(
   fontFamily: "Dongle",
   textTheme: const TextTheme(
-    bodyMedium: TextStyle(fontSize: normalTextSize),
+    bodyMedium: TextStyle(fontSize: defaultTextSize),
     headlineMedium: TextStyle(fontSize: bigTextSize),
+    headlineLarge: TextStyle(
+      fontSize: headlineTextSize,
+      fontWeight: FontWeight.bold,
+    ),
     bodySmall: TextStyle(fontSize: smallTextSize),
   ),
   scaffoldBackgroundColor: extremelyLightBlue,

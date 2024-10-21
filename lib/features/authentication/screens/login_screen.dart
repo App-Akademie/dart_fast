@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+
+import 'package:dart_fast/config/constants.dart';
 import 'package:dart_fast/config/sizes.dart';
 import 'package:dart_fast/config/themes.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
@@ -17,16 +20,18 @@ class LoginScreen extends StatelessWidget {
           body: Builder(builder: (context) {
             return Column(
               children: [
+                bigVerticalSpacing,
                 Text(
-                  "App Title",
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  appTitle,
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                normalVerticalSpacing,
-                const Placeholder(
-                  fallbackWidth: 300,
-                  fallbackHeight: 300,
+                Transform.rotate(
+                  angle: math.pi / 4,
+                  child: Image.asset(
+                    width: MediaQuery.sizeOf(context).width * .7,
+                    "assets/images/dart_fast_logo.png",
+                  ),
                 ),
-                normalVerticalSpacing,
                 const DfTextField(),
                 normalVerticalSpacing,
                 const DfTextField(),
