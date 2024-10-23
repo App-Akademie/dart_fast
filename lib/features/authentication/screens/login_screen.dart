@@ -32,9 +32,9 @@ class LoginScreen extends StatelessWidget {
                     "assets/images/dart_fast_logo.png",
                   ),
                 ),
-                const DfTextField(),
+                const DfTextField(hintText: "USERNAME"),
                 normalVerticalSpacing,
-                const DfTextField(),
+                const DfTextField(hintText: "PASSWORD"),
                 normalVerticalSpacing,
                 DfButton(
                     onPressed: () {

@@ -48,7 +48,7 @@ class PlayAroundWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text("Default text test"),
-          const DfTextField(),
+          const DfTextField(hintText: "woof"),
           DfButton(
               onPressed: () {
                 log("Button was pressed");

@@ -10,5 +10,5 @@ class Problem {
   });
 
   Problem.solved({required this.exercise, required this.solution})
-      : this.solved = true;
+      : solved = true;
 }
