@@ -1,14 +1,34 @@
+import 'package:dart_fast/config/colors.dart';
 import 'package:flutter/material.dart';
 
-class DfButton extends StatelessWidget {
-  const DfButton({super.key, required this.onPressed, required this.child});
+class DfPrimaryButton extends StatelessWidget {
+  const DfPrimaryButton({
+    super.key,
+    required this.onPressed,
+    required this.child,
+  });
 
-  //final void Function() onPressed;
+  // final void Function() onPressed;
   final VoidCallback onPressed;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(onPressed: onPressed, child: child);
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(
+        style: ButtonStyle(
+          backgroundColor: const WidgetStatePropertyAll(darkBlue),
+          foregroundColor: const WidgetStatePropertyAll(Colors.white),
+          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+          ),
+        ),
+        onPressed: onPressed,
+        child: child,
+      ),
+    );
   }
 }

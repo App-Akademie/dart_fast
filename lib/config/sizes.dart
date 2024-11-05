@@ -10,6 +10,11 @@ const double smallDistance = 8;
 const double normalDistance = 24;
 const double bigDistance = 48;
 
+const double smallPaddingSize = 12;
+const double mediumPaddingSize = 24;
+const double normalPaddingSize = 32;
+const double bigPaddingSize = 48;
+
 const smallVerticalSpacing = SizedBox(height: smallDistance);
 const normalVerticalSpacing = SizedBox(height: normalDistance);
 const bigVerticalSpacing = SizedBox(height: bigDistance);

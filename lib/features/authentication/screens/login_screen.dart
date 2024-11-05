@@ -32,17 +32,27 @@ class LoginScreen extends StatelessWidget {
                     "assets/images/dart_fast_logo.png",
                   ),
                 ),
-                const DfTextField(hintText: "USERNAME"),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: normalPaddingSize),
+                  child: DfTextField(hintText: "USERNAME"),
+                ),
                 normalVerticalSpacing,
-                const DfTextField(hintText: "PASSWORD"),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: normalPaddingSize),
+                  child: DfTextField(hintText: "PASSWORD"),
+                ),
                 normalVerticalSpacing,
-                DfButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const MainScreen(),
-                      ));
-                    },
-                    child: const Text("Login")),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: normalPaddingSize),
+                  child: DfPrimaryButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ));
+                      },
+                      child: const Text("Login")),
+                ),
                 const Text("Forgot Password"),
                 const Text("Need an account?"),
               ],
