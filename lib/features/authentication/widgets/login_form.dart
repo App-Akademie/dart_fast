@@ -11,7 +11,10 @@ import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key, required this.repository});
+  const LoginForm({
+    super.key,
+    required this.repository,
+  });
 
   final DatabaseRepository repository;
 
@@ -112,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
     );
     if (wasLoginSuccessfull) {
       log("Login was successfull :)");
-      navigateToNext(context);
+      navigateToNext(context, widget.repository);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -124,10 +127,10 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-void navigateToNext(BuildContext context) {
+void navigateToNext(BuildContext context, DatabaseRepository repository) {
   Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (context) => const MainScreen(),
+      builder: (context) => MainScreen(repository: repository),
     ),
   );
 }
