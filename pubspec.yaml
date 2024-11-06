@@ -29,6 +29,11 @@ flutter:
           weight: 700
         - asset: assets/fonts/Dongle-Light.ttf
           weight: 300
+    - family: JetbrainsMono
+      fonts: 
+        - asset: assets/fonts/JetBrainsMono.ttf
+        - asset: assets/fonts/JetBrainsMono-Italic.ttf
+          style: italic
 
 flutter_launcher_icons:
   android: true
