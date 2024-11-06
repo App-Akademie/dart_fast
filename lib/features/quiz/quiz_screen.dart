@@ -26,6 +26,7 @@ class _QuizScreenState extends State<QuizScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Frage (Was passiert?)
             Expanded(
               flex: 4,
               child: Text(
@@ -34,6 +35,7 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
             ),
             const Divider(),
+            // Code
             Expanded(
               flex: 4,
               child: Align(
@@ -45,6 +47,7 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
             ),
             const Divider(),
+            // Antwortmöglichkeiten
             Expanded(
               flex: 3,
               child: MultipleChoiceWidget(

@@ -8,7 +8,9 @@ class MockDatabase implements DatabaseRepository {
   // Der aktuell eingeloggte User. Ist keiner eingeloggt, ist der Wert null.
   User? _currentUser;
   // Der Programmierer soll von außen keinen direkten Zugriff haben.
-  final List<User> _users = [User(userName: "kai@aa.de", password: "passwort")];
+  final List<User> _users = [
+    User(userName: "kai@aa.de", password: "passwort"),
+  ];
   // Enthält ALLE Aufgaben.
   final List<Exercise> _problems = [
     Exercise(
@@ -64,6 +66,8 @@ class MockDatabase implements DatabaseRepository {
     for (User currentUser in _users) {
       if (currentUser.userName == userName) {
         if (currentUser.password == password) {
+          _currentUser = currentUser;
+
           return true;
         } else {
           return false;

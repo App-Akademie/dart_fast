@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   final DatabaseRepository repository = MockDatabase();
+
   runApp(MainApp(repository: repository));
 }
 
