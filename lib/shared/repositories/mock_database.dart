@@ -13,7 +13,7 @@ class MockDatabase implements DatabaseRepository {
   final List<Exercise> _problems = [
     Exercise(
       title: "Simple Addition",
-      description: "Welche Ausgabe wird durch den folgendne Code erzeugt?",
+      description: "Welche Ausgabe wird durch den folgenden Code erzeugt?",
       problem: "int i = 17;\nint x = 4;\n\nprint(i + x);",
       choices: ["25", "21", "17"],
       correctSolutionIndex: 1,
