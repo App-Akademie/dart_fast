@@ -36,30 +36,30 @@ class MockDatabase implements DatabaseRepository {
 
   /// Alle vorhandenen User zurückgeben.
   @override
-  List<User> getAllUsers() {
-    return _users;
+  Future<List<User>> getAllUsers() {
+    return Future.value(_users);
   }
 
   /// Einen User zur App hinzufügen (registieren) (addUser / createUser)
   /// Jeden User darf es nur einmal geben. Das hier überprüfen und "false"
   /// zurückgeben, falls es den User schon gibt.
   @override
-  bool addUser(String newUserName, String newPassword) {
+  Future<bool> addUser(String newUserName, String newPassword) {
     // Überprüfen, ob es den User schon gibt.
     for (User user in _users) {
       if (newUserName == user.userName) {
-        return false;
+        return Future.value(false);
       }
     }
     User newUser = User(userName: newUserName, password: newPassword);
     _users.add(newUser);
 
-    return true;
+    return Future.delayed(const Duration(seconds: 1), () => true);
   }
 
   /// Logindaten eines Benutzers überprüfen (checkUserCredentials)
   @override
-  bool login({
+  Future<bool> login({
     required String userName,
     required String password,
   }) {
@@ -68,29 +68,34 @@ class MockDatabase implements DatabaseRepository {
         if (currentUser.password == password) {
           _currentUser = currentUser;
 
-          return true;
+          return Future.value(true);
         } else {
-          return false;
+          return Future.value(false);
         }
       }
     }
 
-    return false;
+    return Future.value(false);
   }
 
   @override
-  void logout() {
+  Future<void> logout() {
     _currentUser = null;
+
+    return Future.value();
   }
 
   @override
-  User? getCurrentUser() {
-    return _currentUser;
+  Future<User?> getCurrentUser() {
+    return Future.delayed(
+      const Duration(milliseconds: 1234),
+      () => _currentUser,
+    );
   }
 
   /// Die Daten eines Users anpassen (editUser)
   @override
-  void editUser(User user) {
+  Future<void> editUser(User user) {
     // TODO: implement editUser
     throw UnimplementedError();
   }
@@ -101,36 +106,48 @@ class MockDatabase implements DatabaseRepository {
 
   /// Alle Code-Aufgaben holen
   @override
-  List<Exercise> getAllProblems() {
-    return _problems;
+  Future<List<Exercise>> getAllProblems() {
+    return Future.value(_problems);
   }
 
   /// Code-Aufgabe holen (getNextProblem)
   @override
-  Exercise getNextProblem() {
-    return _problems[_nextUnsolvedExerciseIndex];
+  Future<Exercise> getNextProblem() {
+    return Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        return _problems[_nextUnsolvedExerciseIndex];
+      },
+    );
   }
+
+  // @override
+  // Future<Exercise> getNextProblem() async {
+  //   await Future.delayed(const Duration(seconds: 2));
+
+  //   return _problems[_nextUnsolvedExerciseIndex];
+  // }
 
   /// Prüfung einer Lösung (checkSolution)
   @override
-  bool checkSolution(Exercise exercise, String? userSolution) {
+  Future<bool> checkSolution(Exercise exercise, String? userSolution) {
     final correctSolution = exercise.choices[exercise.correctSolutionIndex];
     if (correctSolution == userSolution) {
       _nextUnsolvedExerciseIndex++;
-      return true;
+      return Future.delayed(const Duration(milliseconds: 500), () => true);
     } else {
-      return false;
+      return Future.value(false);
     }
   }
 
   /// Holt das Exerciseboard für einen User
   @override
-  ExerciseBoard getExerciseBoard() {
+  Future<ExerciseBoard> getExerciseBoard() {
     final List<Exercise>? solvedProblems = _solvedProblemsByUsers[_currentUser];
     if (solvedProblems != null) {
-      return ExerciseBoard(solvedProblems);
+      return Future.value(ExerciseBoard(solvedProblems));
     } else {
-      return ExerciseBoard([]);
+      return Future.value(ExerciseBoard([]));
     }
   }
 }

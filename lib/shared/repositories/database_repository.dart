@@ -4,40 +4,40 @@ import 'package:dart_fast/shared/models/user.dart';
 
 abstract class DatabaseRepository {
   /// Alle vorhandenen User zurückgeben.
-  List<User> getAllUsers();
+  Future<List<User>> getAllUsers();
 
   /// Einen User zur App hinzufügen (registieren) (addUser / createUser)
   /// Gibt "false" zurück, wenn es den User schon gibt.
-  bool addUser(String userName, String password);
+  Future<bool> addUser(String userName, String password);
 
   /// Die Daten eines Users anpassen (editUser)
-  void editUser(User user);
+  Future<void> editUser(User user);
 
   /// Benutzer einloggen (login)
-  bool login({
+  Future<bool> login({
     required String userName,
     required String password,
   });
 
-  void logout();
+  Future<void> logout();
 
   /// Aktuell eingeloggten User zurückgeben.
   /// Falls keiner eingeloggt ist, wird null zurückgegeben.
-  User? getCurrentUser();
+  Future<User?> getCurrentUser();
 
   /// Code-Aufgabe erstellen (createProblem)
 
   /// Code-Aufgabe löschen (deleteProblem)
 
   /// Alle Code-Aufgaben holen
-  List<Exercise> getAllProblems();
+  Future<List<Exercise>> getAllProblems();
 
   /// Code-Aufgabe holen (getNextProblem)
-  Exercise getNextProblem();
+  Future<Exercise> getNextProblem();
 
   /// Prüfung einer Lösung (checkSolution)
-  bool checkSolution(Exercise exercise, String? userSolution);
+  Future<bool> checkSolution(Exercise exercise, String? userSolution);
 
   /// Holt das Exerciseboard für einen Benutzer
-  ExerciseBoard getExerciseBoard();
+  Future<ExerciseBoard> getExerciseBoard();
 }
