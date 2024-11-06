@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
     // noch nicht gesetzt ist.
     _screens = [
       QuizScreen(
-        exercise: widget.repository.getNextProblem(),
+        repository: widget.repository,
       ),
       const SettingsScreen(),
     ];

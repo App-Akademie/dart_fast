@@ -105,32 +105,37 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  void navigateToNext(DatabaseRepository repository) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MainScreen(repository: repository),
+      ),
+    );
+  }
+
+  void showLoginUnsuccessfullMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text("Login failed"),
+      ),
+    );
+  }
+
   void checkLoginAndContinue({
     required String userName,
     required String password,
-  }) {
-    bool wasLoginSuccessfull = widget.repository.login(
+  }) async {
+    bool wasLoginSuccessfull = await widget.repository.login(
       userName: userName,
       password: password,
     );
+
     if (wasLoginSuccessfull) {
       log("Login was successfull :)");
-      navigateToNext(context, widget.repository);
+      navigateToNext(widget.repository);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          behavior: SnackBarBehavior.floating,
-          content: Text("Login failed"),
-        ),
-      );
+      showLoginUnsuccessfullMessage();
     }
   }
-}
-
-void navigateToNext(BuildContext context, DatabaseRepository repository) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => MainScreen(repository: repository),
-    ),
-  );
 }
