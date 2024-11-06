@@ -1,5 +1,6 @@
 import 'package:dart_fast/config/sizes.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
+import 'package:dart_fast/features/quiz/multiple_choice_widget.dart';
 import 'package:dart_fast/shared/models/problem.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,14 @@ class _QuizScreenState extends State<QuizScreen> {
               child: MultipleChoiceWidget(
                 choices: widget.exercise.choices,
                 currentlySelectedIndex: currentlySelectedAnswerIndex,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() {
+                      currentlySelectedAnswerIndex =
+                          widget.exercise.choices.indexOf(value);
+                    });
+                  }
+                },
               ),
             ),
             DfPrimaryButton(
@@ -59,46 +67,6 @@ class _QuizScreenState extends State<QuizScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class MultipleChoiceWidget extends StatelessWidget {
-  const MultipleChoiceWidget({
-    super.key,
-    required this.choices,
-    required this.currentlySelectedIndex,
-    required this.onChanged,
-  });
-
-  final List<String> choices;
-  final int currentlySelectedIndex;
-  final void Function(String?) onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: choices.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Radio<String>(
-            value: choices[index],
-            groupValue: choices[currentlySelectedIndex],
-            onChanged: (value) {
-              onChanged(value);
-            },
-          ),
-          title: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              choices[index],
-              style: const TextStyle(
-                fontSize: 24,
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
