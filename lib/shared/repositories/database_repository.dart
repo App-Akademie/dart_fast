@@ -29,14 +29,14 @@ abstract class DatabaseRepository {
 
   /// Code-Aufgabe löschen (deleteProblem)
 
-  /// Prüfung einer Lösung (checkSolution)
-  bool checkSolution(Problem problem, String solution);
+  /// Alle Code-Aufgaben holen
+  List<Exercise> getAllProblems();
 
   /// Code-Aufgabe holen (getNextProblem)
-  Problem getNextProblem();
+  Exercise getNextProblem();
 
-  /// Alle Code-Aufgaben holen
-  List<Problem> getAllProblems();
+  /// Prüfung einer Lösung (checkSolution)
+  bool checkSolution(Exercise exercise, String? userSolution);
 
   /// Holt das Exerciseboard für einen Benutzer
   ExerciseBoard getExerciseBoard();

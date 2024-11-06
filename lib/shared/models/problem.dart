@@ -1,14 +1,25 @@
-class Problem {
-  String exercise;
-  String solution;
-  bool solved;
+class Exercise {
+  final String title;
+  final String description;
+  final String problem;
+  final List<String> choices;
+  final int correctSolutionIndex;
+  final bool solved;
 
-  Problem({
-    required this.exercise,
-    required this.solution,
+  Exercise({
+    required this.title,
+    required this.description,
+    required this.problem,
+    required this.choices,
+    required this.correctSolutionIndex,
     this.solved = false,
   });
 
-  Problem.solved({required this.exercise, required this.solution})
-      : solved = true;
+  Exercise.solved({
+    required this.title,
+    required this.description,
+    required this.problem,
+    required this.choices,
+    required this.correctSolutionIndex,
+  }) : solved = true;
 }

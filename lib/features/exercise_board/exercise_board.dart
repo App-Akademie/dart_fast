@@ -1,7 +1,7 @@
 import 'package:dart_fast/shared/models/problem.dart';
 
 class ExerciseBoard {
-  final List<Problem> solvedProblems;
+  final List<Exercise> solvedProblems;
 
   ExerciseBoard(this.solvedProblems);
 }

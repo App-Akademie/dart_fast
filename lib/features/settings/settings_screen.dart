@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
+  static const screenTitle = "Settings";
   const SettingsScreen({super.key});
 
   @override
