@@ -1,11 +1,35 @@
+import 'package:dart_fast/features/authentication/screens/login_screen.dart';
+import 'package:dart_fast/features/authentication/widgets/df_button.dart';
+import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const screenTitle = "Settings";
-  const SettingsScreen({super.key});
+  const SettingsScreen({super.key, required this.repository});
+
+  final DatabaseRepository repository;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const CircleAvatar(
+          radius: 128,
+          backgroundImage: AssetImage("assets/images/dart_fast_logo.png"),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 64, right: 64),
+          child: DfPrimaryButton(
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(repository: repository),
+                    ),
+                  ),
+              child: const Icon(Icons.logout)),
+        )
+      ],
+    );
   }
 }
