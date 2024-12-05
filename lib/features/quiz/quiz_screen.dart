@@ -76,9 +76,11 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   DfPrimaryButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       "Test Answer",
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyMedium?.fontSize),
                     ),
                   ),
                 ],
