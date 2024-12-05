@@ -28,7 +28,9 @@ class _MainScreenState extends State<MainScreen> {
       QuizScreen(
         repository: widget.repository,
       ),
-      const SettingsScreen(),
+      SettingsScreen(
+        repository: widget.repository,
+      ),
     ];
   }
 
