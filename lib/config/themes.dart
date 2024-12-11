@@ -17,5 +17,10 @@ final ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(backgroundColor: veryLightBlue),
   navigationBarTheme: const NavigationBarThemeData(
     backgroundColor: veryLightBlue,
+    labelTextStyle: WidgetStatePropertyAll(
+      TextStyle(
+        fontSize: defaultTextSize,
+      ),
+    ),
   ),
 );
