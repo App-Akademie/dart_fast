@@ -1,8 +1,8 @@
-class User {
+class UserData {
   String userName;
   String password;
 
-  User({required this.userName, required this.password});
+  UserData({required this.userName, required this.password});
 
   @override
   String toString() {

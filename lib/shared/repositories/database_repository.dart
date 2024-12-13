@@ -1,6 +1,6 @@
 import 'package:dart_fast/features/exercise_board/exercise_board.dart';
 import 'package:dart_fast/shared/models/problem.dart';
-import 'package:dart_fast/shared/models/user.dart';
+import 'package:dart_fast/shared/models/user_data.dart';
 
 abstract class DatabaseRepository {
   /// Code-Aufgabe erstellen (createProblem)
@@ -17,5 +17,5 @@ abstract class DatabaseRepository {
   Future<bool> checkSolution(Exercise exercise, String? userSolution);
 
   /// Holt das Exerciseboard für einen Benutzer
-  Future<ExerciseBoard> getExerciseBoardFor(User currentUser);
+  Future<ExerciseBoard> getExerciseBoardFor(UserData currentUser);
 }

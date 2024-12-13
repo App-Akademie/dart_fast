@@ -1,17 +1,17 @@
-import 'package:dart_fast/shared/models/user.dart';
+import 'package:dart_fast/shared/models/user_data.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
 
 class MockAuthRepository implements AuthRepository {
   // Der aktuell eingeloggte User. Ist keiner eingeloggt, ist der Wert null.
-  User? _currentUser;
+  UserData? _currentUser;
   // Der Programmierer soll von außen keinen direkten Zugriff haben.
-  final List<User> _users = [
-    User(userName: "kai@aa.de", password: "passwort"),
+  final List<UserData> _users = [
+    UserData(userName: "kai@aa.de", password: "passwort"),
   ];
 
   /// Alle vorhandenen User zurückgeben.
   @override
-  Future<List<User>> getAllUsers() {
+  Future<List<UserData>> getAllUsers() {
     return Future.value(_users);
   }
 
@@ -21,12 +21,12 @@ class MockAuthRepository implements AuthRepository {
   @override
   Future<bool> addUser(String newUserName, String newPassword) {
     // Überprüfen, ob es den User schon gibt.
-    for (User user in _users) {
+    for (UserData user in _users) {
       if (newUserName == user.userName) {
         return Future.value(false);
       }
     }
-    User newUser = User(userName: newUserName, password: newPassword);
+    UserData newUser = UserData(userName: newUserName, password: newPassword);
     _users.add(newUser);
 
     return Future.delayed(const Duration(seconds: 1), () => true);
@@ -38,7 +38,7 @@ class MockAuthRepository implements AuthRepository {
     required String userName,
     required String password,
   }) {
-    for (User currentUser in _users) {
+    for (UserData currentUser in _users) {
       if (currentUser.userName == userName) {
         if (currentUser.password == password) {
           _currentUser = currentUser;
@@ -61,7 +61,7 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<User?> getCurrentUser() {
+  Future<UserData?> getCurrentUser() {
     return Future.delayed(
       const Duration(milliseconds: 1234),
       () => _currentUser,
@@ -70,7 +70,7 @@ class MockAuthRepository implements AuthRepository {
 
   /// Die Daten eines Users anpassen (editUser)
   @override
-  Future<void> editUser(User user) {
+  Future<void> editUser(UserData user) {
     // TODO: implement editUser
     throw UnimplementedError();
   }

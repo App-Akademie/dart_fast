@@ -1,6 +1,6 @@
 import 'package:dart_fast/features/exercise_board/exercise_board.dart';
 import 'package:dart_fast/shared/models/problem.dart';
-import 'package:dart_fast/shared/models/user.dart';
+import 'package:dart_fast/shared/models/user_data.dart';
 
 import 'database_repository.dart';
 
@@ -26,7 +26,7 @@ class MockDatabase implements DatabaseRepository {
   // Was ist die nächste Aufgabe, die der Benutzer noch nicht gelöst hat?
   int _nextUnsolvedExerciseIndex = 0;
   // Enthält die Aufgabe, die die jeweiligen User gelöst haben.
-  final Map<User, List<Exercise>> _solvedProblemsByUsers = {};
+  final Map<UserData, List<Exercise>> _solvedProblemsByUsers = {};
 
   /// Code-Aufgabe erstellen (createProblem)
 
@@ -70,7 +70,7 @@ class MockDatabase implements DatabaseRepository {
 
   /// Holt das Exerciseboard für einen User
   @override
-  Future<ExerciseBoard> getExerciseBoardFor(User currentUser) {
+  Future<ExerciseBoard> getExerciseBoardFor(UserData currentUser) {
     final List<Exercise>? solvedProblems = _solvedProblemsByUsers[currentUser];
     if (solvedProblems != null) {
       return Future.value(ExerciseBoard(solvedProblems));
