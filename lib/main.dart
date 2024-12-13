@@ -1,11 +1,17 @@
 import 'package:dart_fast/features/authentication/screens/login_screen.dart';
+import 'package:dart_fast/firebase_options.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:dart_fast/shared/repositories/mock_auth_repository.dart';
 import 'package:dart_fast/shared/repositories/mock_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final DatabaseRepository databaseRepository = MockDatabase();
   final AuthRepository authRepository = MockAuthRepository();
 
