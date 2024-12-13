@@ -7,16 +7,19 @@ import 'package:dart_fast/features/authentication/logic/email_validator.dart';
 import 'package:dart_fast/features/authentication/logic/password_validator.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
 import 'package:dart_fast/main_screen.dart';
+import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
     super.key,
-    required this.repository,
+    required this.databaseRepository,
+    required this.authRepository,
   });
 
-  final DatabaseRepository repository;
+  final DatabaseRepository databaseRepository;
+  final AuthRepository authRepository;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -105,10 +108,14 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  void navigateToNext(DatabaseRepository repository) {
+  void navigateToNext(
+      DatabaseRepository repository, AuthRepository authRepository) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MainScreen(repository: repository),
+        builder: (context) => MainScreen(
+          databaseRepository: repository,
+          authRepository: authRepository,
+        ),
       ),
     );
   }
@@ -126,14 +133,14 @@ class _LoginFormState extends State<LoginForm> {
     required String userName,
     required String password,
   }) async {
-    bool wasLoginSuccessfull = await widget.repository.login(
+    bool wasLoginSuccessfull = await widget.authRepository.login(
       userName: userName,
       password: password,
     );
 
     if (wasLoginSuccessfull) {
       log("Login was successfull :)");
-      navigateToNext(widget.repository);
+      navigateToNext(widget.databaseRepository, widget.authRepository);
     } else {
       showLoginUnsuccessfullMessage();
     }

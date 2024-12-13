@@ -1,12 +1,18 @@
 import 'package:dart_fast/features/authentication/screens/login_screen.dart';
+import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
+import 'package:dart_fast/shared/repositories/mock_auth_repository.dart';
 import 'package:dart_fast/shared/repositories/mock_database.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  final DatabaseRepository repository = MockDatabase();
+  final DatabaseRepository databaseRepository = MockDatabase();
+  final AuthRepository authRepository = MockAuthRepository();
 
-  runApp(MainApp(repository: repository));
+  runApp(MainApp(
+    databaseRepository: databaseRepository,
+    authRepository: authRepository,
+  ));
 }
 
 /// Features
@@ -18,14 +24,20 @@ void main() {
 // - Einstellungen der App ändern (Settings)
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key, required this.repository});
+  const MainApp({
+    super.key,
+    required this.databaseRepository,
+    required this.authRepository,
+  });
 
-  final DatabaseRepository repository;
+  final DatabaseRepository databaseRepository;
+  final AuthRepository authRepository;
 
   @override
   Widget build(BuildContext context) {
     return LoginScreen(
-      repository: repository,
+      databaseRepository: databaseRepository,
+      authRepository: authRepository,
     );
   }
 }
