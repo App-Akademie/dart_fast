@@ -6,6 +6,7 @@ import 'package:dart_fast/shared/repositories/firebase_auth_repository.dart';
 import 'package:dart_fast/shared/repositories/mock_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,9 +17,16 @@ void main() async {
   final DatabaseRepository databaseRepository = MockDatabase();
   final AuthRepository authRepository = FirebaseAuthRepository();
 
-  runApp(MainApp(
-    databaseRepository: databaseRepository,
-    authRepository: authRepository,
+  runApp(MultiProvider(
+    // Hier kommen die Repositories rein, die wir später verwenden können wollen.
+    providers: [
+      Provider<DatabaseRepository>(create: (_) => MockDatabase()),
+      Provider<AuthRepository>(create: (_) => FirebaseAuthRepository()),
+    ],
+    child: MainApp(
+      databaseRepository: databaseRepository,
+      authRepository: authRepository,
+    ),
   ));
 }
 
