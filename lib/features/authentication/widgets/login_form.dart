@@ -10,16 +10,10 @@ import 'package:dart_fast/main_screen.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({
-    super.key,
-    required this.databaseRepository,
-    required this.authRepository,
-  });
-
-  final DatabaseRepository databaseRepository;
-  final AuthRepository authRepository;
+  const LoginForm({super.key});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -112,10 +106,7 @@ class _LoginFormState extends State<LoginForm> {
       DatabaseRepository repository, AuthRepository authRepository) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MainScreen(
-          databaseRepository: repository,
-          authRepository: authRepository,
-        ),
+        builder: (context) => const MainScreen(),
       ),
     );
   }
@@ -133,14 +124,16 @@ class _LoginFormState extends State<LoginForm> {
     required String userName,
     required String password,
   }) async {
-    bool wasLoginSuccessfull = await widget.authRepository.login(
+    final authRepository = context.read<AuthRepository>();
+    final databaseRepository = context.read<DatabaseRepository>();
+    bool wasLoginSuccessfull = await authRepository.login(
       userName: userName,
       password: password,
     );
 
     if (wasLoginSuccessfull) {
       log("Login was successfull :)");
-      navigateToNext(widget.databaseRepository, widget.authRepository);
+      navigateToNext(databaseRepository, authRepository);
     } else {
       showLoginUnsuccessfullMessage();
     }

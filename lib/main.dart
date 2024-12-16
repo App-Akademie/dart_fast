@@ -14,8 +14,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final DatabaseRepository databaseRepository = MockDatabase();
-  final AuthRepository authRepository = FirebaseAuthRepository();
+  // final DatabaseRepository databaseRepository = MockDatabase();
+  // final AuthRepository authRepository = FirebaseAuthRepository();
 
   runApp(MultiProvider(
     // Hier kommen die Repositories rein, die wir später verwenden können wollen.
@@ -23,10 +23,7 @@ void main() async {
       Provider<DatabaseRepository>(create: (_) => MockDatabase()),
       Provider<AuthRepository>(create: (_) => FirebaseAuthRepository()),
     ],
-    child: MainApp(
-      databaseRepository: databaseRepository,
-      authRepository: authRepository,
-    ),
+    child: const MainApp(),
   ));
 }
 
@@ -39,20 +36,10 @@ void main() async {
 // - Einstellungen der App ändern (Settings)
 
 class MainApp extends StatelessWidget {
-  const MainApp({
-    super.key,
-    required this.databaseRepository,
-    required this.authRepository,
-  });
-
-  final DatabaseRepository databaseRepository;
-  final AuthRepository authRepository;
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LoginScreen(
-      databaseRepository: databaseRepository,
-      authRepository: authRepository,
-    );
+    return const LoginScreen();
   }
 }

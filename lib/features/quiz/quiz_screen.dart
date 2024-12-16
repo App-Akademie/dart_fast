@@ -4,14 +4,14 @@ import 'package:dart_fast/features/quiz/multiple_choice_widget.dart';
 import 'package:dart_fast/shared/models/problem.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuizScreen extends StatefulWidget {
   static const screenTitle = "Quiz";
 
-  const QuizScreen({super.key, required this.repository});
+  const QuizScreen({super.key});
 
   // final Exercise exercise;
-  final DatabaseRepository repository;
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -20,7 +20,7 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   int currentlySelectedAnswerIndex = 0;
   late final Future<Exercise> nextProblemFuture =
-      widget.repository.getNextProblem();
+      context.read<DatabaseRepository>().getNextProblem();
 
   @override
   Widget build(BuildContext context) {
