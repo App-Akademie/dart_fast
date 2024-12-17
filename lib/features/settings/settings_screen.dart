@@ -1,6 +1,8 @@
 import 'package:dart_fast/features/authentication/screens/login_screen.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
+import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const screenTitle = "Settings";
@@ -19,11 +21,11 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 64, right: 64),
           child: DfPrimaryButton(
             onPressed: () {
-              authRepository.logout();
+              context.read<AuthRepository>().logout();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
               );
             },
