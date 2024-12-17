@@ -1,19 +1,10 @@
 import 'package:dart_fast/features/authentication/screens/login_screen.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
-import 'package:dart_fast/shared/repositories/auth_repository.dart';
-import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const screenTitle = "Settings";
-  const SettingsScreen({
-    super.key,
-    required this.databaseRepository,
-    required this.authRepository,
-  });
-
-  final DatabaseRepository databaseRepository;
-  final AuthRepository authRepository;
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +23,7 @@ class SettingsScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(
-                    databaseRepository: databaseRepository,
-                    authRepository: authRepository,
-                  ),
+                  builder: (context) => LoginScreen(),
                 ),
               );
             },

@@ -1,19 +1,12 @@
 import 'package:dart_fast/config/themes.dart';
 import 'package:dart_fast/features/quiz/quiz_screen.dart';
 import 'package:dart_fast/features/settings/settings_screen.dart';
-import 'package:dart_fast/shared/repositories/auth_repository.dart';
-import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
     super.key,
-    required this.databaseRepository,
-    required this.authRepository,
   });
-
-  final DatabaseRepository databaseRepository;
-  final AuthRepository authRepository;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -31,13 +24,8 @@ class _MainScreenState extends State<MainScreen> {
     // Das muss hier initialisiert werden, weil das Repository davor
     // noch nicht gesetzt ist.
     _screens = [
-      QuizScreen(
-        repository: widget.databaseRepository,
-      ),
-      SettingsScreen(
-        databaseRepository: widget.databaseRepository,
-        authRepository: widget.authRepository,
-      ),
+      const QuizScreen(),
+      const SettingsScreen(),
     ];
   }
 
