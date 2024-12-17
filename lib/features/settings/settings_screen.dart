@@ -18,13 +18,17 @@ class SettingsScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 64, right: 64),
           child: DfPrimaryButton(
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
-                  ),
-              child: const Icon(Icons.logout)),
+            onPressed: () {
+              authRepository.logout();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ),
+              );
+            },
+            child: const Icon(Icons.logout),
+          ),
         )
       ],
     );
