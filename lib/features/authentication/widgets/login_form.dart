@@ -89,6 +89,19 @@ class _LoginFormState extends State<LoginForm> {
               child: const Text("Login"),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: normalPaddingSize,
+            ),
+            child: DfPrimaryButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const MainScreen(),
+                ));
+              },
+              child: const Text("Skiiiiiiiip"),
+            ),
+          ),
           bigVerticalSpacing,
           const Text(
             "Forgot Password?",

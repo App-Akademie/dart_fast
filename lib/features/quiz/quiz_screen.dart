@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:dart_fast/config/sizes.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
 import 'package:dart_fast/features/quiz/multiple_choice_widget.dart';
-import 'package:dart_fast/shared/models/problem.dart';
+import 'package:dart_fast/shared/models/exercise.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -87,6 +89,7 @@ class _QuizScreenState extends State<QuizScreen> {
               );
             } else if (snapshot.connectionState == ConnectionState.done &&
                 snapshot.hasError) {
+              log("Error! ${snapshot.error}");
               return const Icon(Icons.error, size: 128);
             }
 

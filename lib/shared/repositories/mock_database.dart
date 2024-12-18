@@ -1,5 +1,5 @@
 import 'package:dart_fast/features/exercise_board/exercise_board.dart';
-import 'package:dart_fast/shared/models/problem.dart';
+import 'package:dart_fast/shared/models/exercise.dart';
 import 'package:dart_fast/shared/models/user_data.dart';
 
 import 'database_repository.dart';
@@ -16,7 +16,7 @@ class MockDatabase implements DatabaseRepository {
     ),
     Exercise(
       title: "While Addition",
-      description: "Welche Ausgabe wird durch den folgendne Code erzeugt?",
+      description: "Welche Ausgabe wird durch den folgenden Code erzeugt?",
       problem:
           "int i = 0;\nint x = 1;\nwhile i < 5 {\n  i++;\n  x 0 x + 1;\n}\n\nprint(x);",
       choices: ["4", "10", "5"],

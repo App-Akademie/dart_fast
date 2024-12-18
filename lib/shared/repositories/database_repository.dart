@@ -1,5 +1,5 @@
 import 'package:dart_fast/features/exercise_board/exercise_board.dart';
-import 'package:dart_fast/shared/models/problem.dart';
+import 'package:dart_fast/shared/models/exercise.dart';
 import 'package:dart_fast/shared/models/user_data.dart';
 
 abstract class DatabaseRepository {

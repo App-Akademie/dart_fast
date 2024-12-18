@@ -3,7 +3,7 @@ import 'package:dart_fast/firebase_options.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:dart_fast/shared/repositories/firebase_auth_repository.dart';
-import 'package:dart_fast/shared/repositories/mock_database.dart';
+import 'package:dart_fast/shared/repositories/firebase_database_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +20,12 @@ void main() async {
   runApp(MultiProvider(
     // Hier kommen die Repositories rein, die wir später verwenden können wollen.
     providers: [
-      Provider<DatabaseRepository>(create: (_) => MockDatabase()),
-      Provider<AuthRepository>(create: (_) => FirebaseAuthRepository()),
+      Provider<DatabaseRepository>(
+        create: (_) => FirestoreDatabaseRepository(),
+      ),
+      Provider<AuthRepository>(
+        create: (_) => FirebaseAuthRepository(),
+      ),
     ],
     child: const MainApp(),
   ));
