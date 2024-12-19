@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dart_fast/shared/models/user_data.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,6 +41,7 @@ class FirebaseAuthRepository implements AuthRepository {
         email: userName,
         password: password,
       );
+      log(credential.toString());
     } catch (_) {
       return false;
     }
