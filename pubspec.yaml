@@ -1,7 +1,7 @@
 name: dart_fast
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 0.1.0+2
 
 environment:
   sdk: ^3.2.1
@@ -39,11 +39,13 @@ flutter:
         - asset: assets/fonts/JetBrainsMono-Italic.ttf
           style: italic
 
+# dart run flutter_launcher_icons
 flutter_launcher_icons:
   android: true
   ios: true
   image_path: assets/icon/icon.png
 
+# dart run flutter_native_splash:create
 flutter_native_splash:
  color: "#89B0BD"
  image: assets/splash/splash.png

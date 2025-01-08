@@ -15,6 +15,11 @@ Der Benutzer soll eine Übersicht über die von ihm gelösten Aufgaben haben, um
 
 Möglicherweise muss `flutter pub get` im Terminal ausgeführt werden oder `Flutter: Get Packages` in Visual Studio Code.
 
+## Icons + Splash Screen neu generieren
+
+`dart run flutter_launcher_icons`
+`dart run flutter_native_splash:create`
+
 ## Screenshots
 
 Login Screen                       |  Quiz Screen         

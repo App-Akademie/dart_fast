@@ -92,7 +92,7 @@ BEGIN
             VALUE "CompanyName", "com.example" "\0"
             VALUE "FileDescription", "dart_fast" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "dart_fast" "\0"
+            VALUE "InternalName", "de.appakademie.dartfast" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "dart_fast.exe" "\0"
             VALUE "ProductName", "dart_fast" "\0"
