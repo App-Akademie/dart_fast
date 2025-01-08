@@ -43,6 +43,7 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
+  remove_alpha_ios: true
   image_path: assets/icon/icon.png
 
 # dart run flutter_native_splash:create
