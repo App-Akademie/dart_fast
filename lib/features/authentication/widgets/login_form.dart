@@ -28,89 +28,91 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          bigVerticalSpacing,
-          Text(
-            appTitle,
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-          Transform.rotate(
-            angle: math.pi / 4,
-            child: Image.asset(
-              width: MediaQuery.sizeOf(context).width * .7,
-              "assets/images/dart_fast_logo.png",
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            bigVerticalSpacing,
+            Text(
+              appTitle,
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: normalPaddingSize,
-            ),
-            child: TextFormField(
-              controller: usernameController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "USERNAME",
+            Transform.rotate(
+              angle: math.pi / 4,
+              child: Image.asset(
+                width: MediaQuery.sizeOf(context).width * .7,
+                "assets/images/dart_fast_logo.png",
               ),
-              autocorrect: false,
-              validator: emailValidator,
             ),
-          ),
-          smallVerticalSpacing,
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: normalPaddingSize,
-            ),
-            child: TextFormField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "PASSWORD",
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: normalPaddingSize,
               ),
-              autocorrect: false,
-              obscureText: true,
-              validator: passwordValidator,
+              child: TextFormField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "USERNAME",
+                ),
+                autocorrect: false,
+                validator: emailValidator,
+              ),
             ),
-          ),
-          normalVerticalSpacing,
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: normalPaddingSize,
+            smallVerticalSpacing,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: normalPaddingSize,
+              ),
+              child: TextFormField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "PASSWORD",
+                ),
+                autocorrect: false,
+                obscureText: true,
+                validator: passwordValidator,
+              ),
             ),
-            child: DfPrimaryButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  checkLoginAndContinue(
-                    userName: usernameController.text,
-                    password: passwordController.text,
-                  );
-                }
-              },
-              child: const Text("Login"),
+            normalVerticalSpacing,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: normalPaddingSize,
+              ),
+              child: DfPrimaryButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    checkLoginAndContinue(
+                      userName: usernameController.text,
+                      password: passwordController.text,
+                    );
+                  }
+                },
+                child: const Text("Login"),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: normalPaddingSize,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: normalPaddingSize,
+              ),
+              child: DfPrimaryButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MainScreen(),
+                  ));
+                },
+                child: const Text("Skiiiiiiiip"),
+              ),
             ),
-            child: DfPrimaryButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const MainScreen(),
-                ));
-              },
-              child: const Text("Skiiiiiiiip"),
+            bigVerticalSpacing,
+            const Text(
+              "Forgot Password?",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),
             ),
-          ),
-          bigVerticalSpacing,
-          const Text(
-            "Forgot Password?",
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-            ),
-          ),
-          const Text("Need an account?"),
-        ],
+            const Text("Need an account?"),
+          ],
+        ),
       ),
     );
   }
