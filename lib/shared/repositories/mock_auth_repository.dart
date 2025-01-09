@@ -74,4 +74,21 @@ class MockAuthRepository implements AuthRepository {
     // TODO: implement editUser
     throw UnimplementedError();
   }
+
+  @override
+  bool register(String userName, String password) {
+    // Herausfinden, ob der Benutzer schon existiert.
+    // Wenn ja, `false` zurückgeben. Ansonsten anlegen.
+    for (final UserData user in _users) {
+      if (user.userName.toLowerCase() == userName.toLowerCase()) {
+        return false;
+      }
+    }
+
+    // Neuen Benutzer anlegen
+    final UserData newUser = UserData(userName: userName, password: password);
+    _users.add(newUser);
+
+    return true;
+  }
 }

@@ -53,4 +53,10 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<void> logout() async {
     await auth.signOut();
   }
+
+  @override
+  bool register(String userName, String password) {
+    // TODO: implement register
+    throw UnimplementedError();
+  }
 }

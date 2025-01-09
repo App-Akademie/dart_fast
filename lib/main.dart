@@ -1,9 +1,10 @@
+import 'package:dart_fast/config/themes.dart';
 import 'package:dart_fast/features/authentication/screens/login_screen.dart';
 import 'package:dart_fast/firebase_options.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:dart_fast/shared/repositories/database_repository.dart';
-import 'package:dart_fast/shared/repositories/firebase_auth_repository.dart';
-import 'package:dart_fast/shared/repositories/firebase_database_repository.dart';
+import 'package:dart_fast/shared/repositories/mock_auth_repository.dart';
+import 'package:dart_fast/shared/repositories/mock_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +22,12 @@ void main() async {
     // Hier kommen die Repositories rein, die wir später verwenden können wollen.
     providers: [
       Provider<DatabaseRepository>(
-        create: (_) => FirestoreDatabaseRepository(),
+        create: (_) => MockDatabase(),
+        // create: (_) => FirestoreDatabaseRepository(),
       ),
       Provider<AuthRepository>(
-        create: (_) => FirebaseAuthRepository(),
+        create: (_) => MockAuthRepository(),
+        // create: (_) => FirebaseAuthRepository(),
       ),
     ],
     child: const MainApp(),
@@ -44,6 +47,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginScreen();
+    return MaterialApp(
+      theme: lightTheme,
+      home: const SafeArea(
+        child: Scaffold(
+          body: LoginScreen(),
+        ),
+      ),
+    );
   }
 }

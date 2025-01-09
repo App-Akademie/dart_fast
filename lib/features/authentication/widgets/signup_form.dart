@@ -1,29 +1,28 @@
-import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:dart_fast/config/constants.dart';
 import 'package:dart_fast/config/sizes.dart';
 import 'package:dart_fast/features/authentication/logic/email_validator.dart';
-import 'package:dart_fast/features/authentication/logic/password_validator.dart';
-import 'package:dart_fast/features/authentication/screens/signup_screen.dart';
+import 'package:dart_fast/features/authentication/logic/matching_password_validator.dart';
 import 'package:dart_fast/features/authentication/widgets/df_button.dart';
 import 'package:dart_fast/main_screen.dart';
 import 'package:dart_fast/shared/repositories/auth_repository.dart';
-import 'package:dart_fast/shared/repositories/database_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SignupForm> createState() => _SignupFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignupFormState extends State<SignupForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController repeatedPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class _LoginFormState extends State<LoginForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            bigVerticalSpacing,
+            normalVerticalSpacing,
             Text(
               appTitle,
               style: Theme.of(context).textTheme.headlineLarge,
@@ -40,14 +39,14 @@ class _LoginFormState extends State<LoginForm> {
             Transform.rotate(
               angle: math.pi / 4,
               child: Image.asset(
-                width: MediaQuery.sizeOf(context).width * .7,
+                width: MediaQuery.sizeOf(context).width * .3,
                 "assets/images/dart_fast_logo.png",
               ),
             ),
+            bigVerticalSpacing,
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: normalPaddingSize,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: normalPaddingSize),
               child: TextFormField(
                 controller: usernameController,
                 decoration: const InputDecoration(
@@ -58,7 +57,7 @@ class _LoginFormState extends State<LoginForm> {
                 validator: emailValidator,
               ),
             ),
-            smallVerticalSpacing,
+            normalVerticalSpacing,
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: normalPaddingSize,
@@ -71,7 +70,12 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 autocorrect: false,
                 obscureText: true,
-                validator: passwordValidator,
+                validator: (String? value) {
+                  return matchingPasswordValidator(
+                    passwordController.text,
+                    repeatedPasswordController.text,
+                  );
+                },
               ),
             ),
             normalVerticalSpacing,
@@ -79,50 +83,40 @@ class _LoginFormState extends State<LoginForm> {
               padding: const EdgeInsets.symmetric(
                 horizontal: normalPaddingSize,
               ),
+              child: TextFormField(
+                controller: repeatedPasswordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "REPEAT PASSWORD",
+                ),
+                autocorrect: false,
+                obscureText: true,
+                validator: (String? value) {
+                  return matchingPasswordValidator(
+                    passwordController.text,
+                    repeatedPasswordController.text,
+                  );
+                },
+              ),
+            ),
+            bigVerticalSpacing,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: normalPaddingSize,
+              ),
               child: DfPrimaryButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    checkLoginAndContinue(
+                    checkRegisterAndContinue(
                       userName: usernameController.text,
                       password: passwordController.text,
                     );
                   }
                 },
                 child: const Text(
-                  "Login",
+                  "Register",
                   style: TextStyle(fontSize: 24),
                 ),
-              ),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(
-            //     horizontal: normalPaddingSize,
-            //   ),
-            //   child: DfPrimaryButton(
-            //     onPressed: () {
-            //       Navigator.of(context).push(MaterialPageRoute(
-            //         builder: (context) => const MainScreen(),
-            //       ));
-            //     },
-            //     child: const Text("Skiiiiiiiip"),
-            //   ),
-            // ),
-            bigVerticalSpacing,
-            const Text(
-              "Forgot Password?",
-              style: TextStyle(
-                decoration: TextDecoration.underline,
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const SignupScreen(),
-              )),
-              child: Text(
-                "Need an account?",
-                style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
-                    decoration: TextDecoration.underline),
               ),
             ),
           ],
@@ -131,40 +125,42 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  void navigateToNext(
-      DatabaseRepository repository, AuthRepository authRepository) {
-    Navigator.of(context).push(
+  // Versucht, einen neuen Benutzer zu registrieren.
+
+  void checkRegisterAndContinue({
+    required String userName,
+    required String password,
+  }) async {
+    // Logik sollte vermutlich im AuthRepository gemacht werden:
+    // Schauen, ob der Benutzername noch frei ist.
+    // Schauen, ob die Passwörter übereinstimmen.
+    // -> Muss da auch was als Validierungsmeldung gesetzt werden?
+    // -> Wird über den entsprechenden Validator gemacht.
+    final authRepository = context.read<AuthRepository>();
+    final bool registerSuccess = authRepository.register(userName, password);
+    if (!registerSuccess) {
+      showUsernameAlreadyTakenMessage();
+    } else {
+      // Einloggen und weitergehen auf Exercise-Screen.
+      await authRepository.login(userName: userName, password: password);
+      continueToMainScreen();
+    }
+  }
+
+  void showUsernameAlreadyTakenMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text("Username already taken."),
+      ),
+    );
+  }
+
+  void continueToMainScreen() {
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const MainScreen(),
       ),
     );
-  }
-
-  void showLoginUnsuccessfullMessage() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text("Login failed"),
-      ),
-    );
-  }
-
-  void checkLoginAndContinue({
-    required String userName,
-    required String password,
-  }) async {
-    final authRepository = context.read<AuthRepository>();
-    final databaseRepository = context.read<DatabaseRepository>();
-    bool wasLoginSuccessfull = await authRepository.login(
-      userName: userName,
-      password: password,
-    );
-
-    if (wasLoginSuccessfull) {
-      log("Login was successfull :)");
-      navigateToNext(databaseRepository, authRepository);
-    } else {
-      showLoginUnsuccessfullMessage();
-    }
   }
 }

@@ -11,6 +11,10 @@ abstract class AuthRepository {
   /// Die Daten eines Users anpassen (editUser)
   Future<void> editUser(UserData user);
 
+  /// Versucht einen Benutzer anzulegen.
+  /// Falls es den Benutzernamen schon gibt, wird `false` zurückgegeben.
+  bool register(String userName, String password);
+
   /// Benutzer einloggen (login)
   Future<bool> login({
     required String userName,

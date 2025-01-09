@@ -1,4 +1,3 @@
-import 'package:dart_fast/config/themes.dart';
 import 'package:dart_fast/features/quiz/quiz_screen.dart';
 import 'package:dart_fast/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,29 +30,26 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: lightTheme,
-      home: Scaffold(
-        appBar: AppBar(title: Text(_selectedAppBarText)),
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: _selectedIndex,
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.question_mark),
-              label: "Quiz",
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.settings),
-              label: "Settings",
-            ),
-          ],
-          onDestinationSelected: (int newIndex) => setState(() {
-            _selectedIndex = newIndex;
-          }),
-        ),
-        // Builder needed for different context, so the theme is picked up.
-        body: _screens[_selectedIndex],
+    return Scaffold(
+      appBar: AppBar(title: Text(_selectedAppBarText)),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.question_mark),
+            label: "Quiz",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+          ),
+        ],
+        onDestinationSelected: (int newIndex) => setState(() {
+          _selectedIndex = newIndex;
+        }),
       ),
+      // Builder needed for different context, so the theme is picked up.
+      body: _screens[_selectedIndex],
     );
   }
 }
