@@ -22,10 +22,8 @@ class FirestoreDatabaseRepository implements DatabaseRepository {
     final User? user = _auth.currentUser;
     if (user == null) return [];
 
-    final QuerySnapshot<Map<String, dynamic>> docs = await _db
-        .collection("exercises")
-        .where("userId", isEqualTo: user.uid)
-        .get();
+    final QuerySnapshot<Map<String, dynamic>> docs =
+        await _db.collection("exercises").get();
     for (final doc in docs.docs) {
       final Map<String, dynamic> data = doc.data();
 

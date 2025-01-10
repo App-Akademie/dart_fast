@@ -137,9 +137,10 @@ class _SignupFormState extends State<SignupForm> {
     // -> Muss da auch was als Validierungsmeldung gesetzt werden?
     // -> Wird über den entsprechenden Validator gemacht.
     final authRepository = context.read<AuthRepository>();
-    final bool registerSuccess = authRepository.register(userName, password);
+    final bool registerSuccess =
+        await authRepository.register(userName, password);
     if (!registerSuccess) {
-      showUsernameAlreadyTakenMessage();
+      showAccountCreationFailedMessage();
     } else {
       // Einloggen und weitergehen auf Exercise-Screen.
       await authRepository.login(userName: userName, password: password);
@@ -147,11 +148,11 @@ class _SignupFormState extends State<SignupForm> {
     }
   }
 
-  void showUsernameAlreadyTakenMessage() {
+  void showAccountCreationFailedMessage() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         behavior: SnackBarBehavior.floating,
-        content: Text("Username already taken."),
+        content: Text("Username probably already taken 😬"),
       ),
     );
   }

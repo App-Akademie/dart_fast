@@ -13,7 +13,7 @@ abstract class AuthRepository {
 
   /// Versucht einen Benutzer anzulegen.
   /// Falls es den Benutzernamen schon gibt, wird `false` zurückgegeben.
-  bool register(String userName, String password);
+  Future<bool> register(String userName, String password);
 
   /// Benutzer einloggen (login)
   Future<bool> login({

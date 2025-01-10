@@ -5,7 +5,7 @@ import 'package:dart_fast/shared/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Future<bool> addUser(String userName, String password) {
@@ -37,7 +37,7 @@ class FirebaseAuthRepository implements AuthRepository {
     required String password,
   }) async {
     try {
-      final UserCredential credential = await auth.signInWithEmailAndPassword(
+      final UserCredential credential = await _auth.signInWithEmailAndPassword(
         email: userName,
         password: password,
       );
@@ -51,12 +51,34 @@ class FirebaseAuthRepository implements AuthRepository {
 
   @override
   Future<void> logout() async {
-    await auth.signOut();
+    await _auth.signOut();
   }
 
   @override
-  bool register(String userName, String password) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<bool> register(String userName, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: userName,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      // Die Codes sollten eigentlich irgendwie weitergegeben werden, damit
+      // der Benutzer weiß, was passiert ist. Oder auf Firebase geloggt werden.
+      switch (e.code) {
+        case "email-already-in-use":
+          log("Firebase Auth Exception: email-already-in-use");
+        case "invalid-email":
+          log("Firebase Auth Exception: invalid-email");
+        case "network-request-failed:":
+          log("Firebase Auth Exception: network-request-failed");
+      }
+      return false;
+      // Unexpected Error
+    } catch (e) {
+      log("Unexpected exception 😨");
+      return false;
+    }
+
+    return true;
   }
 }

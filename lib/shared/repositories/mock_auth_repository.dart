@@ -76,7 +76,7 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  bool register(String userName, String password) {
+  Future<bool> register(String userName, String password) async {
     // Herausfinden, ob der Benutzer schon existiert.
     // Wenn ja, `false` zurückgeben. Ansonsten anlegen.
     for (final UserData user in _users) {
